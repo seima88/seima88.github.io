@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F計算</title>
+
+    <style>
+        #con {
+            display: grid;
+            grid-template-rows: 39px 36px 39px 36px 39px 36px;
+            grid-template-columns: 90px 90px 60px 90px 60px 90px 90px 90px;
+        }
+        #item_p {
+            grid-row: 2 / 6;
+            grid-column: 1 / 2;
+        }
+        #item_v {
+            grid-row: 2 / 4;
+            grid-column: 2 / 3;
+        }
+        #item_m {
+            grid-row: 4 / 6;
+            grid-column: 2 / 3;
+        }
+        #item_q {
+            grid-row: 3 / 5;
+            grid-column: 4 / 5;
+        }
+        #item_pq {
+            grid-row: 1 / 7;
+            grid-column: 6 / 7;
+        }
+        #item_vq {
+            grid-row: 1 / 3;
+            grid-column: 7 / 9;
+        }
+        #item_mq {
+            grid-row: 3 / 7;
+            grid-column: 7 / 8;
+        }
+        #item_f {
+            grid-row: 3 / 5;
+            grid-column: 8 / 9;
+        }
+        #item_g {
+            grid-row: 5 / 7;
+            grid-column: 8 / 9;
+        }
+        .box {
+            position: relative;
+            margin: 2px;
+            padding: 0;
+            border: solid 3px #ffb1a8;
+            border-radius: 4px;
+            background-color: #cffffd;
+            box-shadow: 5px 5px 0 0 #d9d9d9;
+        }
+        .box .box_title {
+            position: absolute;
+            display: inline-block;
+            top: -2px;
+            left: -2px;
+            padding: 0 9px;
+            height: 25px;
+            line-height: 25px;
+            font-size: 17px;
+            background: #ffb1a8;
+            color: #ffffff;
+            font-weight: bold;
+            border-radius: 4px 0 4px 0;
+        }
+        .box p {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+</head>
+<body>
+    <div>
+        <label for="ru-ru">ジュニア</label>
+        <input 
+        type="radio"
+        name="ru-ru"
+        value="juni"
+        onclick="saiko0();" />
+
+        <label for="ru-ru">シニア</label>
+        <input 
+        type="radio"
+        name="ru-ru"
+        value="sini"
+        checked
+        onclick="saiko1();" />
+    </div>
+    <script>
+        function saiko0(){
+            document.getElementById("saiko1").disabled = true;
+            document.getElementById("saiko2").disabled = true;
+            document.getElementById("saiko3").disabled = true;
+            document.getElementById("saiko4").disabled = true;
+            document.getElementById("saiko5").disabled = true;
+            document.getElementById("saiko6").disabled = true;
+            document.getElementById("tokkyu").disabled = true;
+            document.getElementById("tokkyu").value = 0;
+            
+        }
+        function saiko1(){
+            document.getElementById("saiko1").disabled = false;
+            document.getElementById("saiko2").disabled = false;
+            document.getElementById("saiko3").disabled = false;
+            document.getElementById("saiko4").disabled = false;
+            document.getElementById("saiko5").disabled = false;
+            document.getElementById("saiko6").disabled = false;
+            document.getElementById("tokkyu").disabled = false;
+        }
+    </script>
+    <div>
+        <label>サイコロ</label>
+
+        <label for="saiko">1</label>
+        <input 
+        type="radio"
+        name="saiko"
+        id="saiko1"
+        value="1"
+        checked />
+
+        <label for="saiko">2</label>
+        <input 
+        type="radio"
+        name="saiko"
+        id="saiko2"
+        value="2" />
+
+        <label for="saiko">3</label>
+        <input 
+        type="radio"
+        name="saiko"
+        id="saiko3"
+        value="3" />
+
+        <label for="saiko">4</label>
+        <input 
+        type="radio"
+        name="saiko"
+        id="saiko4"
+        value="4" />
+
+        <label for="saiko">5</label>
+        <input 
+        type="radio"
+        name="saiko"
+        id="saiko5"
+        value="5" />
+
+        <label for="saiko">6</label>
+        <input 
+        type="radio"
+        name="saiko"
+        id="saiko6"
+        value="6" />
+    </div>
+    <div>
+        <label>何期目？</label>
+
+        <label for="nanki">2期目</label>
+        <input 
+        type="radio"
+        name="nanki"
+        value="2"
+        checked />
+
+        <label for="nanki">3期目</label>
+        <input 
+        type="radio"
+        name="nanki"
+        value="3" />
+
+        <label for="nanki">4期目</label>
+        <input 
+        type="radio"
+        name="nanki"
+        value="4" />
+
+        <label for="nanki">5期目</label>
+        <input 
+        type="radio"
+        name="nanki"
+        value="5" />
+    </div>
+    <div>
+        <label for="hito">人の数</label>
+        <input 
+        type="number"
+        name="hito"
+        id="hito"
+        min="0"
+        value="0" />
+    </div>
+    <div>
+        <label>倉庫</label>
+
+        <label for="souko">0</label>
+        <input 
+        type="radio"
+        name="souko"
+        value="0"
+        checked />
+
+        <label for="souko">1</label>
+        <input 
+        type="radio"
+        name="souko"
+        value="1" />
+
+        <label for="souko">2</label>
+        <input 
+        type="radio"
+        name="souko"
+        value="2" />
+    </div>
+    <div>
+        <label for="tyo">長借残高</label>
+        <input 
+        type="number"
+        name="tyo"
+        id="tyo"
+        min="0"
+        value="0" />
+    </div>
+    <div>
+        <label for="tan">短借残高</label>
+        <input 
+        type="number"
+        name="tan"
+        id="tan"
+        min="0"
+        value="0" />
+    </div>
+    <div>
+        <label for="uke">受取利息</label>
+        <input 
+        type="number"
+        name="uke"
+        id="uke"
+        min="0"
+        value="0" />
+    </div>
+    <div>
+        <label>小型機械</label>
+
+        <label for="ko">0</label>
+        <input 
+        type="radio"
+        name="ko"
+        value="0"
+        onclick="ata0(this.checked);"
+        checked />
+
+        <label for="ko">1</label>
+        <input 
+        type="radio"
+        name="ko"
+        value="1"
+        onclick="ata1(this.checked);" />
+
+        <label for="ko">2</label>
+        <input 
+        type="radio"
+        name="ko"
+        value="2"
+        onclick="ata2(this.checked);" />
+
+        <label for="ko">3</label>
+        <input 
+        type="radio"
+        name="ko"
+        value="3"
+        onclick="ata3(this.checked);" />
+
+        <script>
+            function ata0(ischecked){
+                document.getElementById("ata1").disabled = true;
+                document.getElementById("ata2").disabled = true;
+                document.getElementById("ata3").disabled = true;
+                document.getElementById("ata0").checked = true;
+            }
+
+            function ata1(ischecked){
+                document.getElementById("ata1").disabled = false;
+                document.getElementById("ata2").disabled = true;
+                document.getElementById("ata3").disabled = true;
+                document.getElementById("ata1").checked = true;
+            }
+
+            function ata2(ischecked){
+                document.getElementById("ata1").disabled = false;
+                document.getElementById("ata2").disabled = false;
+                document.getElementById("ata3").disabled = true;
+                document.getElementById("ata2").checked = true;
+            }
+
+            function ata3(ischecked){
+                document.getElementById("ata1").disabled = false;
+                document.getElementById("ata2").disabled = false;
+                document.getElementById("ata3").disabled = false;
+                document.getElementById("ata3").checked = true;
+            }
+        </script>
+    </div>
+    <div>
+        <label>アタッチメント</label>
+
+        <label for="ata">0</label>
+        <input 
+        type="radio"
+        id="ata0"
+        name="ata"
+        value="0"
+        checked />
+
+        <label for="ata">1</label>
+        <input 
+        type="radio"
+        id="ata1"
+        name="ata"
+        value="1"
+        disabled="disabled" />
+
+        <label for="ata">2</label>
+        <input 
+        type="radio"
+        id="ata2"
+        name="ata"
+        value="2"
+        disabled="disabled" />
+
+        <label for="ata">3</label>
+        <input 
+        type="radio"
+        id="ata3"
+        name="ata"
+        value="3"
+        disabled="disabled" />
+    </div>
+    <div>
+        <label>大型機械</label>
+
+        <label for="oo">0</label>
+        <input 
+        type="radio"
+        name="oo"
+        value="0"
+        checked />
+
+        <label for="oo">1</label>
+        <input 
+        type="radio"
+        name="oo"
+        value="1" />
+
+        <label for="oo">2</label>
+        <input 
+        type="radio"
+        name="oo"
+        value="2" />
+    </div>
+    <div>
+        <label for="tip">チップの数</label>
+        <input 
+        type="number"
+        name="tip"
+        id="tip"
+        min="0"
+        value="0" />
+    </div>
+    <div>
+        <label for="tokkyu">特急の数</label>
+        <input 
+        type="number"
+        name="tokkyu"
+        id="tokkyu"
+        min="0"
+        value="0" />
+    </div>
+    <div>
+        <label for="sonota">その他</label>
+        <input 
+        type="number"
+        name="sonota"
+        id="sonota"
+        value="0" />
+    </div>
+    <div>
+        <label for="p">P</label>
+        <input 
+        type="number"
+        name="p"
+        id="p"
+        min="20"
+        max="40"
+        value="30" />
+    </div>
+    <div>
+        <label for="v">V</label>
+        <input 
+        type="number"
+        name="v"
+        id="v"
+        min="10"
+        max="40"
+        value="15" />
+    </div>
+    <div>
+        <label for="g">G</label>
+        <input 
+        type="number"
+        name="g"
+        id="g"
+        min="0"
+        value="0" />
+    </div>
+    <div>
+        <button type="button" name="button" onclick="a();">更新</button>
+    </div>
+    <script>
+        function a(){
+            const ruru = document.getElementsByName("ru-ru");
+            const saiko = document.getElementsByName("saiko");
+            const nanki = document.getElementsByName("nanki");
+            const souko_moto = document.getElementsByName("souko");
+            const ko_moto = document.getElementsByName("ko");
+            const ata_moto = document.getElementsByName("ata");
+            const oo_moto = document.getElementsByName("oo");
+            const hito = Number(document.getElementById("hito").value);
+            const tyo = Number(document.getElementById("tyo").value);
+            const tan = Number(document.getElementById("tan").value);
+            const uke = Number(document.getElementById("uke").value);
+            const tip = Number(document.getElementById("tip").value);
+            const tokkyu = Number(document.getElementById("tokkyu").value);
+            const sonota = Number(document.getElementById("sonota").value);
+            const p = Number(document.getElementById("p").value);
+            const v = Number(document.getElementById("v").value);
+            const g = Number(document.getElementById("g").value);
+            let f;
+            let hito1;
+            let hito2;
+            let genbai;
+            let bairitu;
+            let souko;
+            let ko;
+            let ata;
+            let oo;
+            let newg;
+            let m;
+            let pq;
+            let vq;
+            let mq;
+            let q;
+            if(nanki.item(0).checked){
+                hito1 = 22;
+                hito2 = 11;
+            }
+            else if(nanki.item(1).checked){
+                hito1 = 24;
+                hito2 = 12;
+            }
+            else if(nanki.item(2).checked){
+                hito1 = 26;
+                hito2 = 13;
+            }
+            else{
+                hito1 = 28;
+                hito2 = 14;
+            }
+            if(ruru.item(0).checked){
+                bairitu = 1;
+                genbai = 1;
+            }
+            else{
+                genbai = 2;
+                if(saiko.item(0).checked || saiko.item(1).checked || saiko.item(2).checked){
+                    bairitu = 1.1;
+                }
+                else{
+                    bairitu = 1.2
+                }
+            }
+            if(souko_moto.item(0).checked){
+                souko = 0
+            }
+            else if(souko_moto.item(1).checked){
+                souko = 1
+            }
+            else{
+                souko = 2
+            }
+            if(ko_moto.item(0).checked){
+                ko = 0
+            }
+            else if(ko_moto.item(1).checked){
+                ko = 1
+            }
+            else if(ko_moto.item(2).checked){
+                ko = 2
+            }
+            else{
+                ko = 3
+            }
+            if(ata_moto.item(0).checked){
+                ata = 0
+            }
+            else if(ata_moto.item(1).checked){
+                ata = 1
+            }
+            else if(ata_moto.item(2).checked){
+                ata = 2
+            }
+            else{
+                ata = 3
+            }
+            if(oo_moto.item(0).checked){
+                oo = 0
+            }
+            else if(oo_moto.item(1).checked){
+                oo = 1
+            }
+            else{
+                oo = 2
+            }
+            hito1 = Math.round(hito1*bairitu);
+            hito2 = Math.round(hito2*bairitu);
+
+            f = 25 + hito1*(hito + ko + oo) + hito2*hito + 20*souko +
+            Math.round(0.1*tyo) + Math.round(0.2*tan) - uke + 20*tip +
+            40*tokkyu + 10*genbai*ko + 3*genbai*ata + 20*genbai*oo + sonota;
+
+            m = p - v;
+            q = Math.ceil((f + g) / m);
+            pq = p*q;
+            vq = v*q;
+            mq = m*q;
+            newg = mq - f;
+            document.getElementById("p1").innerText = p;
+            document.getElementById("v1").innerText = v;
+            document.getElementById("m1").innerText = m;
+            document.getElementById("q1").innerText = q;
+            document.getElementById("pq1").innerText = pq;
+            document.getElementById("vq1").innerText = vq;
+            document.getElementById("mq1").innerText = mq;
+            document.getElementById("f1").innerText = f;
+            document.getElementById("g1").innerText = newg;
+        }
+    </script>
+    <div id="con">
+        <div class="box" id="item_p">
+            <span class="box_title">P</span>
+            <p id="p1"></p></div>
+        <div class="box" id="item_v">
+            <span class="box_title">V</span>
+            <p id="v1"></p></div>
+        <div class="box" id="item_m">
+            <span class="box_title">M</span>
+            <p id="m1"></p></div>
+        <div class="box" id="item_q">
+            <span class="box_title">Q</span>
+            <p id="q1"></p></div>
+        <div class="box" id="item_pq">
+            <span class="box_title">PQ</span>
+            <p id="pq1"></p></div>
+        <div class="box" id="item_vq">
+            <span class="box_title">VQ</span>
+            <p id="vq1"></p></div>
+        <div class="box" id="item_mq">
+            <span class="box_title">MQ</span>
+            <p id="mq1"></p></div>
+        <div class="box" id="item_f">
+            <span class="box_title">F</span>
+            <p id="f1"></p></div>
+        <div class="box" id="item_g">
+            <span class="box_title">G</span>
+            <p id="g1"></p></div>
+    </div>
+</body>
+</html>
